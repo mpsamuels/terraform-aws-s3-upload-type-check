@@ -10,8 +10,8 @@ exports.handler = async (event) => {
         Bucket: '${bucket}',
         Key: `$${Key}`
     };
-    const data = await s3.getObject(params).promise();
-    const type = data.ContentType;
+    const metaData = await s3.headObject(params).promise()
+    const type = metaData.ContentType;
 
     //If  Content-Type = Image
     if (type.includes('image')) { 
